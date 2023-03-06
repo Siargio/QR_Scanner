@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316729B6047100F98EDD /* AppDelegate.swift */; };
-		ECCD316A29B6047100F98EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316929B6047100F98EDD /* SceneDelegate.swift */; };
-		ECCD316C29B6047100F98EDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316B29B6047100F98EDD /* ViewController.swift */; };
-		ECCD316F29B6047100F98EDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECCD316D29B6047100F98EDD /* Main.storyboard */; };
+		ECCD316C29B6047100F98EDD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316B29B6047100F98EDD /* MainViewController.swift */; };
 		ECCD317129B6047200F98EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECCD317029B6047200F98EDD /* Assets.xcassets */; };
 		ECCD317429B6047200F98EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,9 +16,7 @@
 /* Begin PBXFileReference section */
 		ECCD316429B6047100F98EDD /* QR_Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QR_Scanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCD316729B6047100F98EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ECCD316929B6047100F98EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECCD316B29B6047100F98EDD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ECCD316E29B6047100F98EDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ECCD316B29B6047100F98EDD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		ECCD317029B6047200F98EDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECCD317329B6047200F98EDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECCD317529B6047200F98EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +52,53 @@
 		ECCD316629B6047100F98EDD /* QR_Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				ECCD316729B6047100F98EDD /* AppDelegate.swift */,
-				ECCD316929B6047100F98EDD /* SceneDelegate.swift */,
-				ECCD316B29B6047100F98EDD /* ViewController.swift */,
-				ECCD316D29B6047100F98EDD /* Main.storyboard */,
-				ECCD317029B6047200F98EDD /* Assets.xcassets */,
-				ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */,
+				ECCD317B29B6062E00F98EDD /* App */,
+				ECCD317E29B6068500F98EDD /* ModuleBuilder */,
+				ECCD317D29B6064B00F98EDD /* Sources */,
+				ECCD317C29B6063900F98EDD /* Resources */,
 				ECCD317529B6047200F98EDD /* Info.plist */,
 			);
 			path = QR_Scanner;
+			sourceTree = "<group>";
+		};
+		ECCD317B29B6062E00F98EDD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD316729B6047100F98EDD /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ECCD317C29B6063900F98EDD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD317029B6047200F98EDD /* Assets.xcassets */,
+				ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		ECCD317D29B6064B00F98EDD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD317F29B6080F00F98EDD /* Main */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		ECCD317E29B6068500F98EDD /* ModuleBuilder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModuleBuilder;
+			sourceTree = "<group>";
+		};
+		ECCD317F29B6080F00F98EDD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD316B29B6047100F98EDD /* MainViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +161,6 @@
 			files = (
 				ECCD317429B6047200F98EDD /* LaunchScreen.storyboard in Resources */,
 				ECCD317129B6047200F98EDD /* Assets.xcassets in Resources */,
-				ECCD316F29B6047100F98EDD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +171,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCD316C29B6047100F98EDD /* ViewController.swift in Sources */,
+				ECCD316C29B6047100F98EDD /* MainViewController.swift in Sources */,
 				ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */,
-				ECCD316A29B6047100F98EDD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ECCD316D29B6047100F98EDD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECCD316E29B6047100F98EDD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +316,7 @@
 				INFOPLIST_FILE = QR_Scanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -302,6 +326,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.my.QR-Scanner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -320,7 +347,7 @@
 				INFOPLIST_FILE = QR_Scanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -330,6 +357,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.my.QR-Scanner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
