@@ -45,7 +45,8 @@ final class ScannerViewController: UIViewController {
     }
 
     //MARK: - Properties
-
+    
+    let webView = WebViewController()
     let session = AVCaptureSession()
     let metadataOutput = AVCaptureMetadataOutput()
 
@@ -187,6 +188,16 @@ final class ScannerViewController: UIViewController {
             }
         }
     }
+
+    //MARK: - NAVIGATION
+
+    func goToWebsite(_ url : String) {
+        let viewController = webView
+        viewController.url = url
+        if let navigator = navigationController {
+            navigator.pushViewController(viewController, animated: true)
+        }
+    }
 }
 
 //MARK: - AVCaptureMetadataOutputObjects Delegate Method
@@ -194,7 +205,13 @@ final class ScannerViewController: UIViewController {
 extension ScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        print("работает")
+        if let metadataObject = metadataObjects.first {
+            guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
+            guard let url = readableObject.stringValue else { return }
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            goToWebsite(url)
+        }
+        session.stopRunning()
     }
 }
 
