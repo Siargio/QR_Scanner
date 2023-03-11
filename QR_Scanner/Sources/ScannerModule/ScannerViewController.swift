@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ScannerViewController.swift
 //  QR_Scanner
 //
 //  Created by Sergio on 6.03.23.
@@ -8,8 +8,20 @@
 import UIKit
 import AVFoundation
 
-final class ViewController: UIViewController {
+// MARK: - Protocols
 
+protocol ScannerViewProtocol: AnyObject {
+
+}
+
+// MARK: - Class
+
+final class ScannerViewController: UIViewController {
+
+    // MARK: - Properties
+
+    var presenter: ScannerPresenterProtocol?
+    
     // MARK: - Constants
 
     private enum Constants {
@@ -179,7 +191,7 @@ final class ViewController: UIViewController {
 
 //MARK: - AVCaptureMetadataOutputObjects Delegate Method
 
-extension ViewController : AVCaptureMetadataOutputObjectsDelegate {
+extension ScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         print("работает")
@@ -188,7 +200,7 @@ extension ViewController : AVCaptureMetadataOutputObjectsDelegate {
 
 //MARK: - Alert Functions
 
-extension ViewController {
+extension ScannerViewController {
     /// Alert shown when qr scan
     func errorAlert(_ message: String) {
         let alert = UIAlertController(title: "Uh no!", message: message, preferredStyle: .alert)
@@ -200,7 +212,7 @@ extension ViewController {
 
 //MARK: - Constraint
 
-extension ViewController {
+extension ScannerViewController {
     func setupLayout() {
         NSLayoutConstraint.activate([
             infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -212,4 +224,10 @@ extension ViewController {
             cornersImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.cornersImageHeight)
         ])
     }
+}
+
+//MARK: - ScannerViewProtocol
+
+extension ScannerViewController: ScannerViewProtocol {
+
 }
