@@ -58,9 +58,29 @@ final class WebViewController: UIViewController {
 
     // MARK: - Setups
 
+    // UIActivityViewController
+    @objc func shareInfo() {
+        guard let url = URL(string: url) else { return }
+
+        getDataFromUrl(url: url) { data, _, _ in
+
+            DispatchQueue.main.async() {
+                let activityViewController = UIActivityViewController(activityItems: [data ?? ""], applicationActivities: nil)
+                activityViewController.modalPresentationStyle = .fullScreen
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
+
+    private func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
+        }.resume()
+    }
+
     private func setupNavBar() {
         navigationController?.navigationBar.isHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .done, target: self, action: #selector(shareInfo))
     }
 
     // Check for Valid URL
