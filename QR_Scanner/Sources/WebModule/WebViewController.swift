@@ -11,6 +11,9 @@ import WebKit
 // MARK: - Protocol
 protocol WebViewControllerProtocol: AnyObject {
     var url: String { get set }
+    func displayError()
+    func downloadError()
+    func displaySuccessMessage()
 }
 
 // MARK: - Class
@@ -20,7 +23,6 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
     private enum Strings {
         static let squareImage = UIImage(systemName: "square.and.arrow.up")
         static let keyPath = "estimatedProgress"
-        static let forKey = "estimatedProgress"
     }
 
     // MARK: - Properties
@@ -76,6 +78,18 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
         presenter?.shareInfo(controller: controller)
     }
 
+    func displayError() {
+        AlertService.shared.showAlert(controller: self, type: .error)
+    }
+
+    func downloadError() {
+        AlertService.shared.showAlert(controller: self, type: .downloadError)
+    }
+    
+    func displaySuccessMessage() {
+        AlertService.shared.showAlert(controller: self, type: .success)
+    }
+
     private func setupNavBar() {
         navigationController?.navigationBar.isHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -88,7 +102,7 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
     // Check for Valid URL
     private func checkURL() {
         guard let webURL = URL(string: url) else { return }
-        urlChecker(url) ? showWebsite(webURL) : print("INVALID Reference")
+        urlChecker(url) ? showWebsite(webURL) : displayError()
     }
 
     private func urlChecker (_ urlString: String) -> Bool {
