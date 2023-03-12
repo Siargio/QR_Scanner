@@ -8,21 +8,26 @@
 import UIKit
 import WebKit
 
+// MARK: - Protocol
 protocol WebViewControllerProtocol: AnyObject {
-
+    var url: String { get set }
 }
 
-final class WebViewController: UIViewController {
+// MARK: - Class
+final class WebViewController: UIViewController, WebViewControllerProtocol {
+
+    // MARK: - Constants
+    private enum Strings {
+        static let squareImage = UIImage(systemName: "square.and.arrow.up")
+        static let keyPath = "estimatedProgress"
+        static let forKey = "estimatedProgress"
+    }
 
     // MARK: - Properties
-
     var presenter: WebViewPresenterProtocol?
-
-    var activityViewController: UIActivityViewController?
-    var url = String()
+    var url: String
 
     //MARK: - UIElements
-
     private lazy var webView: WKWebView = {
         var webView = WKWebView()
         let webConfig = WKWebViewConfiguration()
@@ -42,8 +47,17 @@ final class WebViewController: UIViewController {
         return progressView
     }()
 
-    //MARK: - LifeCycle
+    //MARK: - Init
+    init(url: String) {
+        self.url = url
+        super.init(nibName: nil, bundle: nil)
+    }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
@@ -57,51 +71,24 @@ final class WebViewController: UIViewController {
     }
 
     // MARK: - Setups
-
-    // UIActivityViewController
     @objc func shareInfo() {
-        guard let url = URL(string: url) else { return }
-
-        getDataFromUrl(url: url) { data, _, _ in
-
-            DispatchQueue.main.async() {
-                let activityViewController = UIActivityViewController(activityItems: [data ?? ""], applicationActivities: nil)
-                activityViewController.modalPresentationStyle = .fullScreen
-                self.present(activityViewController, animated: true, completion: nil)
-
-                activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-                    if completed {
-                        let alertTitle = (error == nil) ? "Успех!" : "Ошибка!"
-                        let alertMessage = (error == nil) ? "Файл успешно загружен." : "Ошибка при загрузке файла: \(error!.localizedDescription)"
-                        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
-                    }
-                }
-            }
-        }
-    }
-
-    private func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            completion(data, response, error)
-        }.resume()
+        let controller = self
+        presenter?.shareInfo(controller: controller)
     }
 
     private func setupNavBar() {
         navigationController?.navigationBar.isHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"), style: .done, target: self, action: #selector(shareInfo))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Strings.squareImage,
+            style: .done,
+            target: self,
+            action: #selector(shareInfo))
     }
 
     // Check for Valid URL
     private func checkURL() {
-        if urlChecker(url){
-            let url = URL(string: url)!
-            showWebsite(url)
-        } else{
-            //ALERT
-            print("INVALID")
-        }
+        guard let webURL = URL(string: url) else { return }
+        urlChecker(url) ? showWebsite(webURL) : print("INVALID Reference")
     }
 
     private func urlChecker (_ urlString: String) -> Bool {
@@ -116,17 +103,19 @@ final class WebViewController: UIViewController {
         view.addSubview(progressView)
     }
 
-    func showWebsite(_ url : URL) {
+    private func showWebsite(_ url : URL) {
         webView.load(URLRequest(url: url))
     }
 }
 
 //MARK: - WKNavigationDelegate
-
 extension WebViewController: WKNavigationDelegate {
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
+        if keyPath == Strings.keyPath {
             progressView.progress = Float(webView.estimatedProgress)
         }
     }
@@ -141,7 +130,6 @@ extension WebViewController: WKNavigationDelegate {
 }
 
 //MARK: - Constraint
-
 extension WebViewController {
     private func setupLayout() {
         NSLayoutConstraint.activate([
@@ -155,9 +143,4 @@ extension WebViewController {
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
-}
-// MARK: - WebViewControllerProtocol
-
-extension WebViewController: WebViewControllerProtocol {
-
 }

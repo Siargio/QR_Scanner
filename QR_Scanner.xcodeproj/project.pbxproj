@@ -100,8 +100,8 @@
 		ECCD317E29B6068500F98EDD /* ModuleBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				ECD07DA729BCEB45007E46FE /* Router.swift */,
 				ECD07DA929BCEB58007E46FE /* AssemblyModuleBuilder.swift */,
+				ECD07DA729BCEB45007E46FE /* Router.swift */,
 			);
 			path = ModuleBuilder;
 			sourceTree = "<group>";
