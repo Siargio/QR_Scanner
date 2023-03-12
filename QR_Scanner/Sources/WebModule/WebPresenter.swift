@@ -44,11 +44,7 @@ extension WebViewPresenter: WebViewPresenterProtocol {
 
                 activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
                     if completed {
-                        let alertTitle = (error == nil) ? "Успех!" : "Ошибка!"
-                        let alertMessage = (error == nil) ? "Файл успешно загружен." : "Ошибка при загрузке файла: \(error!.localizedDescription)"
-                        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        controller.present(alertController, animated: true, completion: nil)
+                        error == nil ? self.webViewController?.displaySuccessMessage() : self.webViewController?.downloadError()
                     }
                 }
             }

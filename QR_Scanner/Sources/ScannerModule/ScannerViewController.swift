@@ -11,6 +11,7 @@ import AVFoundation
 // MARK: - Protocols
 protocol ScannerViewProtocol: AnyObject {
     func goToWebController(url: String)
+    func cameraError()
 }
 
 // MARK: - Class
@@ -34,7 +35,6 @@ final class ScannerViewController: UIViewController {
         static let cornersImage = UIImage(named: "corners")
         static let keyPath = "transform.scale"
         static let forKey = "animate"
-        static let cameraMissing = "camera missing"
     }
 
     //MARK: - Properties
@@ -115,7 +115,7 @@ final class ScannerViewController: UIViewController {
         blurView.layer.mask = scanLayer
     }
 
-    // Get mask size respect to screen size, For `Dynamic` CameraView Size
+    // Get mask size respect to screen size, for Dynamic CameraView Size
     private func getMaskSize() -> CGRect {
         let viewWidth = view.frame.width
         let rectWidth = viewWidth / Constants.rectWidth
@@ -137,7 +137,7 @@ final class ScannerViewController: UIViewController {
 
     //MARK: - Setup camera session
     private func sessionSetup() {
-        guard let device = AVCaptureDevice.default(for: .video ) else { errorAlert(Strings.cameraMissing)
+        guard let device = AVCaptureDevice.default(for: .video ) else { cameraError()
             return
         }
         session.sessionPreset = AVCaptureSession.Preset.high
@@ -145,7 +145,7 @@ final class ScannerViewController: UIViewController {
             try session.addInput(AVCaptureDeviceInput(device: device))
         }
         catch {
-            errorAlert(error.localizedDescription)
+            cameraError()
         }
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -193,22 +193,18 @@ extension ScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
     }
 }
 
-//MARK: - Alert Functions
-extension ScannerViewController {
-    /// Alert shown when qr scan
-    func errorAlert(_ message: String) {
-        let alert = UIAlertController(title: "Uh no!", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "return", style: .default, handler: nil)
-        alert.addAction(action)
-        self.present(alert,animated: true)
-    }
-}
-
 //MARK: - ScannerViewProtocol
 extension ScannerViewController: ScannerViewProtocol {
     //MARK: - NAVIGATION
     func goToWebController(url: String) {
         presenter?.goToWebsite(url: url)
+    }
+}
+
+//MARK: - Alert Functions
+extension ScannerViewController {
+    func cameraError() {
+        AlertService.shared.showAlert(controller: self, type: .cameraUnavailable)
     }
 }
 
