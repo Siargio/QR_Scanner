@@ -8,28 +8,24 @@
 import UIKit
 
 // MARK: - Protocols
-
 protocol AssemblyBuilderProtocol {
-    
     func createScannerModule(router: RouterProtocol) -> UIViewController
-    func createWebViewModule(router: RouterProtocol) -> UIViewController
+    func createWebViewModule(router: RouterProtocol, url: String) -> UIViewController
 }
 
 // MARK: - Class
-
 final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
-    
     func createScannerModule(router: RouterProtocol) -> UIViewController {
-        let view = ScannerViewController()
-        let presenter = ScannerPresenter(view: view, router: router)
-        view.presenter = presenter
-        return view
+        let viewController = ScannerViewController()
+        let presenter = ScannerPresenter(scannerController: viewController, router: router)
+        viewController.presenter = presenter
+        return viewController
     }
 
-    func createWebViewModule(router: RouterProtocol) -> UIViewController {
-        let view = WebViewController()
-        let presenter = WebViewPresenter(view: view, router: router)
-        view.presenter = presenter
-        return view
+    func createWebViewModule(router: RouterProtocol, url: String) -> UIViewController {
+        let viewController = WebViewController(url: url)
+        let presenter = WebViewPresenter(webViewController: viewController, router: router)
+        viewController.presenter = presenter
+        return viewController
     }
 }

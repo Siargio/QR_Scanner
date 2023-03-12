@@ -8,26 +8,56 @@
 import UIKit
 
 protocol WebViewPresenterProtocol: AnyObject {
-
+    func shareInfo(controller: WebViewController)
 }
 
 final class WebViewPresenter: NSObject {
 
     // MARK: - Properties
-
-    weak var view: WebViewControllerProtocol?
+    weak var webViewController: WebViewControllerProtocol?
     private let router: RouterProtocol?
 
-    // MARK: - LifeCycle
-
-    init(view: WebViewControllerProtocol, router: RouterProtocol) {
-        self.view = view
+    // MARK: - Init
+    init(webViewController: WebViewControllerProtocol, router: RouterProtocol) {
+        self.webViewController = webViewController
         self.router = router
+    }
+
+    // MARK: - Setups
+    private func getUrl() -> String {
+        guard let url = webViewController?.url else { return "error" }
+        return url
     }
 }
 
 // MARK: - WebViewPresenterProtocol
-
 extension WebViewPresenter: WebViewPresenterProtocol {
-    
+    @objc func shareInfo(controller: WebViewController) {
+        guard let url = URL(string: getUrl()) else { return }
+
+        getDataFromUrl(url: url) { data, _, _ in
+
+            DispatchQueue.main.async() {
+                let activityViewController = UIActivityViewController(activityItems: [data ?? ""], applicationActivities: nil)
+                activityViewController.modalPresentationStyle = .fullScreen
+                controller.present(activityViewController, animated: true, completion: nil)
+
+                activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                    if completed {
+                        let alertTitle = (error == nil) ? "Успех!" : "Ошибка!"
+                        let alertMessage = (error == nil) ? "Файл успешно загружен." : "Ошибка при загрузке файла: \(error!.localizedDescription)"
+                        let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        controller.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+
+    private func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            completion(data, response, error)
+        }.resume()
+    }
 }
