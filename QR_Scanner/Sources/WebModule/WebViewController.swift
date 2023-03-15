@@ -69,10 +69,10 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
 
         activityViewController.completionWithItemsHandler = { _, success, _, error in
             if success {
-                self.alert(title: Strings.alertTitleSuccess, message: Strings.alertMessageSuccess)
+                self.showAlert(title: Strings.alertTitleSuccess, message: Strings.alertMessageSuccess)
             }
             if error != nil {
-                self.alert(title: Strings.alertErrorTitleDownload, message: Strings.alertErrorMessageDownload)
+                self.showAlert(title: Strings.alertErrorTitleDownload, message: Strings.alertErrorMessageDownload)
             }
         }
         DispatchQueue.main.async() {
@@ -131,16 +131,6 @@ private extension WebViewController {
             progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
-    }
-}
-
-// MARK: - Alert
-
-private extension WebViewController {
-    func alert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: Strings.alertActionTitle, style: .default))
-        present(alertController, animated: true, completion: nil)
     }
 }
 

@@ -123,7 +123,7 @@ final class ScannerViewController: UIViewController {
     //MARK: - Setup camera session
 
     private func sessionSetup() {
-        guard let device = AVCaptureDevice.default(for: .video ) else { alert(title: Strings.alertTitle, message: Strings.alertMessage)
+        guard let device = AVCaptureDevice.default(for: .video ) else { showAlert(title: Strings.alertTitle, message: Strings.alertMessage) 
             return
         }
         session.sessionPreset = AVCaptureSession.Preset.high
@@ -186,17 +186,6 @@ extension ScannerViewController: ScannerViewProtocol {
 
     func goToWebController(url: String) {
         presenter?.goToWebsite(url: url)
-    }
-}
-
-//MARK: - Alert
-
-extension ScannerViewController {
-
-    func alert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: Strings.alertActionTitle, style: .default))
-        present(alertController, animated: true, completion: nil)
     }
 }
 
