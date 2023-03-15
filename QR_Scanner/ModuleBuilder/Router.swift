@@ -20,23 +20,20 @@ protocol RouterProtocol: RouterMain {
 
 // MARK: - Class
 final class Router: RouterProtocol {
-    var navigationController: UINavigationController? 
+    var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyBuilderProtocol?
 
     init(navigationController: UINavigationController, assemblyBuilder: AssemblyBuilderProtocol){
         self.navigationController = navigationController
         self.assemblyBuilder = assemblyBuilder
     }
-
+    
     func initialViewController() {
-        if let navigationController = navigationController {
-            guard let scannerViewController = assemblyBuilder?.createScannerModule(router: self) else { return }
-            navigationController.viewControllers = [scannerViewController]
-        }
+        guard let scannerViewController = assemblyBuilder?.createScannerModule(router: self) else { return }
+        navigationController?.viewControllers = [scannerViewController]
     }
 
     func showWebView(url: String) {
-        let navigationController = navigationController
         guard let webViewController = assemblyBuilder?.createWebViewModule(router: self, url: url) else { return }
         navigationController?.pushViewController(webViewController, animated: true)
     }

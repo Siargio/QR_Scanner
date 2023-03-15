@@ -8,18 +8,22 @@
 import UIKit
 
 // MARK: - Protocols
+
 protocol ScannerPresenterProtocol: AnyObject {
     func goToWebsite(url : String)
 }
 
 // MARK: - Class
+
 final class ScannerPresenter {
 
     // MARK: - Properties
+
     weak var scannerController: ScannerViewProtocol?
     var router: RouterProtocol?
 
     // MARK: - Init
+
     init(scannerController: ScannerViewProtocol, router: RouterProtocol) {
         self.scannerController = scannerController
         self.router = router
@@ -27,6 +31,7 @@ final class ScannerPresenter {
 }
 
 // MARK: - ScannerPresenterProtocol
+
 extension ScannerPresenter: ScannerPresenterProtocol {
     func goToWebsite(url: String) {
         router?.showWebView(url: url)

@@ -23,8 +23,8 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
     }
 
     func createWebViewModule(router: RouterProtocol, url: String) -> UIViewController {
-        let viewController = WebViewController(url: url)
-        let presenter = WebViewPresenter(webViewController: viewController, router: router)
+        let viewController = WebViewController()
+        let presenter = WebViewPresenter(webViewController: viewController, router: router, url: url)
         viewController.presenter = presenter
         return viewController
     }

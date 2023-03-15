@@ -9,27 +9,22 @@ import UIKit
 import WebKit
 
 // MARK: - Protocol
+
 protocol WebViewControllerProtocol: AnyObject {
-    var url: String { get set }
-    func displayError()
-    func downloadError()
-    func displaySuccessMessage()
+    func showWebsite(URLRequest : URLRequest)
+    func shareInfo(data: Any)
 }
 
 // MARK: - Class
+
 final class WebViewController: UIViewController, WebViewControllerProtocol {
 
-    // MARK: - Constants
-    private enum Strings {
-        static let squareImage = UIImage(systemName: "square.and.arrow.up")
-        static let keyPath = "estimatedProgress"
-    }
-
     // MARK: - Properties
+
     var presenter: WebViewPresenterProtocol?
-    var url: String
 
     //MARK: - UIElements
+
     private lazy var webView: WKWebView = {
         var webView = WKWebView()
         let webConfig = WKWebViewConfiguration()
@@ -49,45 +44,40 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
         return progressView
     }()
 
-    //MARK: - Init
-    init(url: String) {
-        self.url = url
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     //MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
         setupHierarchy()
         setupLayout()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        checkURL()
+        presenter?.loadWebsite()
     }
 
     // MARK: - Setups
-    @objc func shareInfo() {
-        let controller = self
-        presenter?.shareInfo(controller: controller)
-    }
-
-    func displayError() {
-        AlertService.shared.showAlert(controller: self, type: .error)
-    }
-
-    func downloadError() {
-        AlertService.shared.showAlert(controller: self, type: .downloadError)
-    }
     
-    func displaySuccessMessage() {
-        AlertService.shared.showAlert(controller: self, type: .success)
+    func showWebsite(URLRequest : URLRequest) {
+        webView.load(URLRequest)
+    }
+
+    @objc private func share() {
+        presenter?.share()
+    }
+
+    func shareInfo(data: Any) {
+        let activityViewController = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+
+        activityViewController.completionWithItemsHandler = { _, success, _, error in
+            if success {
+                self.alert(title: Strings.alertTitleSuccess, message: Strings.alertMessageSuccess)
+            }
+            if error != nil {
+                self.alert(title: Strings.alertErrorTitleDownload, message: Strings.alertErrorMessageDownload)
+            }
+        }
+        DispatchQueue.main.async() {
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
 
     private func setupNavBar() {
@@ -96,33 +86,17 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
             image: Strings.squareImage,
             style: .done,
             target: self,
-            action: #selector(shareInfo))
-    }
-
-    // Check for Valid URL
-    private func checkURL() {
-        guard let webURL = URL(string: url) else { return }
-        urlChecker(url) ? showWebsite(webURL) : displayError()
-    }
-
-    private func urlChecker (_ urlString: String) -> Bool {
-        if let url = NSURL(string: urlString) {
-            return UIApplication.shared.canOpenURL(url as URL)
-        }
-        return false
+            action: #selector(share))
     }
 
     private func setupHierarchy() {
         view.addSubview(webView)
         view.addSubview(progressView)
     }
-
-    private func showWebsite(_ url : URL) {
-        webView.load(URLRequest(url: url))
-    }
 }
 
 //MARK: - WKNavigationDelegate
+
 extension WebViewController: WKNavigationDelegate {
 
     override func observeValue(forKeyPath keyPath: String?,
@@ -144,7 +118,8 @@ extension WebViewController: WKNavigationDelegate {
 }
 
 //MARK: - Constraint
-extension WebViewController {
+
+private extension WebViewController {
     private func setupLayout() {
         NSLayoutConstraint.activate([
             webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -156,5 +131,29 @@ extension WebViewController {
             progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+}
+
+// MARK: - Alert
+
+private extension WebViewController {
+    func alert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: Strings.alertActionTitle, style: .default))
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Appearance
+
+private extension WebViewController {
+    private enum Strings {
+        static let squareImage = UIImage(systemName: "square.and.arrow.up")
+        static let keyPath = "estimatedProgress"
+        static let alertActionTitle = "Ok"
+        static let alertTitleSuccess = "Успех!"
+        static let alertMessageSuccess = "Файл сохранен."
+        static let alertErrorTitleDownload = "Ошибка!"
+        static let alertErrorMessageDownload = "Ошибка сохранения."
     }
 }

@@ -8,52 +8,56 @@
 import UIKit
 
 protocol WebViewPresenterProtocol: AnyObject {
-    func shareInfo(controller: WebViewController)
+    var url: String { get set }
+    func loadWebsite()
+    func share()
 }
 
-final class WebViewPresenter: NSObject {
+final class WebViewPresenter: WebViewPresenterProtocol {
 
     // MARK: - Properties
+
     weak var webViewController: WebViewControllerProtocol?
     private let router: RouterProtocol?
+    var url: String
 
     // MARK: - Init
-    init(webViewController: WebViewControllerProtocol, router: RouterProtocol) {
+
+    init(webViewController: WebViewControllerProtocol, router: RouterProtocol, url: String) {
         self.webViewController = webViewController
         self.router = router
+        self.url = url
     }
 
     // MARK: - Setups
-    private func getUrl() -> String {
-        guard let url = webViewController?.url else { return "error" }
-        return url
+
+    func loadWebsite() {
+        guard let url = URL(string: url) else { return }
+        let urlRequest = URLRequest(url: url)
+        webViewController?.showWebsite(URLRequest: urlRequest)
     }
-}
 
-// MARK: - WebViewPresenterProtocol
-extension WebViewPresenter: WebViewPresenterProtocol {
-    @objc func shareInfo(controller: WebViewController) {
-        guard let url = URL(string: getUrl()) else { return }
-
-        getDataFromUrl(url: url) { data, _, _ in
-
-            DispatchQueue.main.async() {
-                let activityViewController = UIActivityViewController(activityItems: [data ?? ""], applicationActivities: nil)
-                activityViewController.modalPresentationStyle = .fullScreen
-                controller.present(activityViewController, animated: true, completion: nil)
-
-                activityViewController.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-                    if completed {
-                        error == nil ? self.webViewController?.displaySuccessMessage() : self.webViewController?.downloadError()
-                    }
+    func getDataFromUrl(url: String, completion: @escaping (Result<Data, Error>) -> ()) {
+        guard let url = URL(string: url) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data else {
+                if let error {
+                    completion(.failure(error))
                 }
+                return
+            }
+            completion(.success(data))
+        }.resume()
+    }
+
+    func share() {
+        getDataFromUrl(url: url) { result in
+            switch result {
+            case .success(let data):
+                self.webViewController?.shareInfo(data: data)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
-    }
-
-    private func getDataFromUrl(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            completion(data, response, error)
-        }.resume()
     }
 }

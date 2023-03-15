@@ -9,40 +9,23 @@ import UIKit
 import AVFoundation
 
 // MARK: - Protocols
+
 protocol ScannerViewProtocol: AnyObject {
     func goToWebController(url: String)
-    func cameraError()
 }
 
 // MARK: - Class
+
 final class ScannerViewController: UIViewController {
 
-    // MARK: - Constants
-    private enum Constants {
-        static let ofSizeFont: CGFloat = 24
-        static let outerPathCornerRadius: CGFloat = 30
-        static let rectWidth: CGFloat = 1.4
-        static let two: CGFloat = 2
-        static let toValue = 1.05
-        static let duration = 1.1
-        static let InfoLabelTopAnchor: CGFloat = 60
-        static let cornersImageWidth: CGFloat = 0.85
-        static let cornersImageHeight: CGFloat = 0.42
-    }
-
-    private enum Strings {
-        static let infoLabelText = "Find a code to scan"
-        static let cornersImage = UIImage(named: "corners")
-        static let keyPath = "transform.scale"
-        static let forKey = "animate"
-    }
-
     //MARK: - Properties
+
     var presenter: ScannerPresenterProtocol?
     private let session = AVCaptureSession()
     private let metadataOutput = AVCaptureMetadataOutput()
 
     //MARK: - UIElements
+
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -61,6 +44,7 @@ final class ScannerViewController: UIViewController {
     }()
 
     //MARK: - LifeCycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
@@ -77,6 +61,7 @@ final class ScannerViewController: UIViewController {
     }
 
     //MARK: - Setups
+
     private func initialSetup() {
         self.navigationController?.navigationBar.isHidden = true
         sessionSetup()
@@ -136,8 +121,9 @@ final class ScannerViewController: UIViewController {
     }
 
     //MARK: - Setup camera session
+
     private func sessionSetup() {
-        guard let device = AVCaptureDevice.default(for: .video ) else { cameraError()
+        guard let device = AVCaptureDevice.default(for: .video ) else { alert(title: Strings.alertTitle, message: Strings.alertMessage)
             return
         }
         session.sessionPreset = AVCaptureSession.Preset.high
@@ -145,7 +131,7 @@ final class ScannerViewController: UIViewController {
             try session.addInput(AVCaptureDeviceInput(device: device))
         }
         catch {
-            cameraError()
+            fatalError(error.localizedDescription)
         }
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -181,6 +167,7 @@ final class ScannerViewController: UIViewController {
 }
 
 //MARK: - AVCaptureMetadataOutputObjects Delegate Method
+
 extension ScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         if let metadataObject = metadataObjects.first {
@@ -193,22 +180,28 @@ extension ScannerViewController : AVCaptureMetadataOutputObjectsDelegate {
     }
 }
 
-//MARK: - ScannerViewProtocol
+//MARK: - NAVIGATION
+
 extension ScannerViewController: ScannerViewProtocol {
-    //MARK: - NAVIGATION
+
     func goToWebController(url: String) {
         presenter?.goToWebsite(url: url)
     }
 }
 
-//MARK: - Alert Functions
+//MARK: - Alert
+
 extension ScannerViewController {
-    func cameraError() {
-        AlertService.shared.showAlert(controller: self, type: .cameraUnavailable)
+
+    func alert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: Strings.alertActionTitle, style: .default))
+        present(alertController, animated: true, completion: nil)
     }
 }
 
 //MARK: - Constraint
+
 extension ScannerViewController {
     func setupLayout() {
         NSLayoutConstraint.activate([
@@ -220,5 +213,32 @@ extension ScannerViewController {
             cornersImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constants.cornersImageWidth),
             cornersImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.cornersImageHeight)
         ])
+    }
+}
+
+// MARK: - Appearance
+
+extension ScannerViewController {
+
+    private enum Constants {
+        static let ofSizeFont: CGFloat = 24
+        static let outerPathCornerRadius: CGFloat = 30
+        static let rectWidth: CGFloat = 1.4
+        static let two: CGFloat = 2
+        static let toValue = 1.05
+        static let duration = 1.1
+        static let InfoLabelTopAnchor: CGFloat = 60
+        static let cornersImageWidth: CGFloat = 0.85
+        static let cornersImageHeight: CGFloat = 0.42
+    }
+
+    private enum Strings {
+        static let infoLabelText = "Find a code to scan"
+        static let cornersImage = UIImage(named: "corners")
+        static let keyPath = "transform.scale"
+        static let forKey = "animate"
+        static let alertActionTitle = "Ok"
+        static let alertTitle = "Ошибка!"
+        static let alertMessage = "Камера не доступна!"
     }
 }

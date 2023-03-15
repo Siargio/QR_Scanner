@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ECCAA80C29BE1FB700529B02 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCAA80B29BE1FB700529B02 /* AlertService.swift */; };
 		ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316729B6047100F98EDD /* AppDelegate.swift */; };
 		ECCD316C29B6047100F98EDD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316B29B6047100F98EDD /* ScannerViewController.swift */; };
 		ECCD317129B6047200F98EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECCD317029B6047200F98EDD /* Assets.xcassets */; };
@@ -20,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		ECCAA80B29BE1FB700529B02 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		ECCD316429B6047100F98EDD /* QR_Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QR_Scanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCD316729B6047100F98EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECCD316B29B6047100F98EDD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
@@ -45,22 +43,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		ECCAA80929BE1F8400529B02 /* Servisec */ = {
-			isa = PBXGroup;
-			children = (
-				ECCAA80A29BE1F9200529B02 /* AlertService */,
-			);
-			path = Servisec;
-			sourceTree = "<group>";
-		};
-		ECCAA80A29BE1F9200529B02 /* AlertService */ = {
-			isa = PBXGroup;
-			children = (
-				ECCAA80B29BE1FB700529B02 /* AlertService.swift */,
-			);
-			path = AlertService;
-			sourceTree = "<group>";
-		};
 		ECCD315B29B6047100F98EDD = {
 			isa = PBXGroup;
 			children = (
@@ -82,7 +64,6 @@
 			children = (
 				ECCD317B29B6062E00F98EDD /* App */,
 				ECCD317E29B6068500F98EDD /* ModuleBuilder */,
-				ECCAA80929BE1F8400529B02 /* Servisec */,
 				ECCD317D29B6064B00F98EDD /* Sources */,
 				ECCD317C29B6063900F98EDD /* Resources */,
 				ECCD317529B6047200F98EDD /* Info.plist */,
@@ -219,7 +200,6 @@
 				ECD07DAC29BCEF36007E46FE /* ScannerPresenter.swift in Sources */,
 				ECD07DA829BCEB45007E46FE /* Router.swift in Sources */,
 				ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */,
-				ECCAA80C29BE1FB700529B02 /* AlertService.swift in Sources */,
 				ECD07DAA29BCEB58007E46FE /* AssemblyModuleBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
