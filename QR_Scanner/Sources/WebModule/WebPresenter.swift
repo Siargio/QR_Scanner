@@ -51,10 +51,10 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     }
 
     func share() {
-        getDataFromUrl(url: url) { result in
+        getDataFromUrl(url: url) { [weak self] result in
             switch result {
             case .success(let data):
-                self.webViewController?.shareInfo(data: data)
+                self?.webViewController?.shareInfo(data: data)
             case .failure(let error):
                 print(error.localizedDescription)
             }

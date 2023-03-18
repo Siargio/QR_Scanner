@@ -11,7 +11,7 @@ import WebKit
 // MARK: - Protocol
 
 protocol WebViewControllerProtocol: AnyObject {
-    func showWebsite(URLRequest : URLRequest)
+    func showWebsite(URLRequest: URLRequest)
     func shareInfo(data: Any)
 }
 
@@ -56,7 +56,7 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
 
     // MARK: - Setups
     
-    func showWebsite(URLRequest : URLRequest) {
+    func showWebsite(URLRequest: URLRequest) {
         webView.load(URLRequest)
     }
 
@@ -67,12 +67,12 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
     func shareInfo(data: Any) {
         let activityViewController = UIActivityViewController(activityItems: [data], applicationActivities: nil)
 
-        activityViewController.completionWithItemsHandler = { _, success, _, error in
+        activityViewController.completionWithItemsHandler = { [weak self] _, success, _, error in
             if success {
-                self.showAlert(title: Strings.alertTitleSuccess, message: Strings.alertMessageSuccess)
+                self?.showAlert(title: Strings.alertTitleSuccess, message: Strings.alertMessageSuccess)
             }
             if error != nil {
-                self.showAlert(title: Strings.alertErrorTitleDownload, message: Strings.alertErrorMessageDownload)
+                self?.showAlert(title: Strings.alertErrorTitleDownload, message: Strings.alertErrorMessageDownload)
             }
         }
         DispatchQueue.main.async() {
@@ -101,7 +101,7 @@ extension WebViewController: WKNavigationDelegate {
 
     override func observeValue(forKeyPath keyPath: String?,
                                of object: Any?,
-                               change: [NSKeyValueChangeKey : Any]?,
+                               change: [NSKeyValueChangeKey: Any]?,
                                context: UnsafeMutableRawPointer?) {
         if keyPath == Strings.keyPath {
             progressView.progress = Float(webView.estimatedProgress)

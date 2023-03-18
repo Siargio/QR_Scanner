@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Protocols
 
 protocol ScannerPresenterProtocol: AnyObject {
-    func goToWebsite(url : String)
+    func goToWebsite(url: String)
 }
 
 // MARK: - Class
