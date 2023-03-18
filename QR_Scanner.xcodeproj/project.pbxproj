@@ -7,23 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ECC74A9929C1FCE400FA8A60 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC74A9829C1FCE400FA8A60 /* UIViewController+Ext.swift */; };
 		ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316729B6047100F98EDD /* AppDelegate.swift */; };
-		ECCD316A29B6047100F98EDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316929B6047100F98EDD /* SceneDelegate.swift */; };
-		ECCD316C29B6047100F98EDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316B29B6047100F98EDD /* ViewController.swift */; };
-		ECCD316F29B6047100F98EDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECCD316D29B6047100F98EDD /* Main.storyboard */; };
+		ECCD316C29B6047100F98EDD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316B29B6047100F98EDD /* ScannerViewController.swift */; };
 		ECCD317129B6047200F98EDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECCD317029B6047200F98EDD /* Assets.xcassets */; };
 		ECCD317429B6047200F98EDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */; };
+		ECD07DA829BCEB45007E46FE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07DA729BCEB45007E46FE /* Router.swift */; };
+		ECD07DAA29BCEB58007E46FE /* AssemblyModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07DA929BCEB58007E46FE /* AssemblyModuleBuilder.swift */; };
+		ECD07DAC29BCEF36007E46FE /* ScannerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07DAB29BCEF36007E46FE /* ScannerPresenter.swift */; };
+		ECD07DAF29BCF819007E46FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07DAE29BCF819007E46FE /* WebViewController.swift */; };
+		ECD07DB129BCF839007E46FE /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD07DB029BCF839007E46FE /* WebPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECC74A9829C1FCE400FA8A60 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		ECCD316429B6047100F98EDD /* QR_Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QR_Scanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCD316729B6047100F98EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ECCD316929B6047100F98EDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECCD316B29B6047100F98EDD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ECCD316E29B6047100F98EDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ECCD316B29B6047100F98EDD /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		ECCD317029B6047200F98EDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECCD317329B6047200F98EDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECCD317529B6047200F98EDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECD07DA729BCEB45007E46FE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		ECD07DA929BCEB58007E46FE /* AssemblyModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModuleBuilder.swift; sourceTree = "<group>"; };
+		ECD07DAB29BCEF36007E46FE /* ScannerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerPresenter.swift; sourceTree = "<group>"; };
+		ECD07DAE29BCF819007E46FE /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		ECD07DB029BCF839007E46FE /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ECC74A9A29C1FD0300FA8A60 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				ECC74A9829C1FCE400FA8A60 /* UIViewController+Ext.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		ECCD315B29B6047100F98EDD = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +72,67 @@
 		ECCD316629B6047100F98EDD /* QR_Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				ECCD316729B6047100F98EDD /* AppDelegate.swift */,
-				ECCD316929B6047100F98EDD /* SceneDelegate.swift */,
-				ECCD316B29B6047100F98EDD /* ViewController.swift */,
-				ECCD316D29B6047100F98EDD /* Main.storyboard */,
-				ECCD317029B6047200F98EDD /* Assets.xcassets */,
-				ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */,
+				ECC74A9A29C1FD0300FA8A60 /* Extension */,
+				ECCD317B29B6062E00F98EDD /* App */,
+				ECCD317E29B6068500F98EDD /* ModuleBuilder */,
+				ECCD317D29B6064B00F98EDD /* Sources */,
+				ECCD317C29B6063900F98EDD /* Resources */,
 				ECCD317529B6047200F98EDD /* Info.plist */,
 			);
 			path = QR_Scanner;
+			sourceTree = "<group>";
+		};
+		ECCD317B29B6062E00F98EDD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD316729B6047100F98EDD /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ECCD317C29B6063900F98EDD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD317029B6047200F98EDD /* Assets.xcassets */,
+				ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		ECCD317D29B6064B00F98EDD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD317F29B6080F00F98EDD /* ScannerModule */,
+				ECD07DAD29BCF7D0007E46FE /* WebModule */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		ECCD317E29B6068500F98EDD /* ModuleBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				ECD07DA929BCEB58007E46FE /* AssemblyModuleBuilder.swift */,
+				ECD07DA729BCEB45007E46FE /* Router.swift */,
+			);
+			path = ModuleBuilder;
+			sourceTree = "<group>";
+		};
+		ECCD317F29B6080F00F98EDD /* ScannerModule */ = {
+			isa = PBXGroup;
+			children = (
+				ECCD316B29B6047100F98EDD /* ScannerViewController.swift */,
+				ECD07DAB29BCEF36007E46FE /* ScannerPresenter.swift */,
+			);
+			path = ScannerModule;
+			sourceTree = "<group>";
+		};
+		ECD07DAD29BCF7D0007E46FE /* WebModule */ = {
+			isa = PBXGroup;
+			children = (
+				ECD07DAE29BCF819007E46FE /* WebViewController.swift */,
+				ECD07DB029BCF839007E46FE /* WebPresenter.swift */,
+			);
+			path = WebModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +195,6 @@
 			files = (
 				ECCD317429B6047200F98EDD /* LaunchScreen.storyboard in Resources */,
 				ECCD317129B6047200F98EDD /* Assets.xcassets in Resources */,
-				ECCD316F29B6047100F98EDD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +205,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECCD316C29B6047100F98EDD /* ViewController.swift in Sources */,
+				ECCD316C29B6047100F98EDD /* ScannerViewController.swift in Sources */,
+				ECD07DB129BCF839007E46FE /* WebPresenter.swift in Sources */,
+				ECD07DAF29BCF819007E46FE /* WebViewController.swift in Sources */,
+				ECC74A9929C1FCE400FA8A60 /* UIViewController+Ext.swift in Sources */,
+				ECD07DAC29BCEF36007E46FE /* ScannerPresenter.swift in Sources */,
+				ECD07DA829BCEB45007E46FE /* Router.swift in Sources */,
 				ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */,
-				ECCD316A29B6047100F98EDD /* SceneDelegate.swift in Sources */,
+				ECD07DAA29BCEB58007E46FE /* AssemblyModuleBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ECCD316D29B6047100F98EDD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ECCD316E29B6047100F98EDD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ECCD317229B6047200F98EDD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -290,11 +354,14 @@
 				DEVELOPMENT_TEAM = 3496F3A4HL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QR_Scanner/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allows user to capture a photo or video to upload to their family circle";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Permission required to save information from the Web";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,6 +369,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.my.QR-Scanner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -318,11 +388,14 @@
 				DEVELOPMENT_TEAM = 3496F3A4HL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = QR_Scanner/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allows user to capture a photo or video to upload to their family circle";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Permission required to save information from the Web";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,6 +403,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.my.QR-Scanner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
