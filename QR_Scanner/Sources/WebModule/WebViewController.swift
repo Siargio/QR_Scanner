@@ -72,7 +72,9 @@ final class WebViewController: UIViewController, WebViewControllerProtocol {
                 self?.showAlert(title: Strings.alertTitleSuccess, message: Strings.alertMessageSuccess)
             }
             if error != nil {
-                self?.showAlert(title: Strings.alertErrorTitleDownload, message: Strings.alertErrorMessageDownload)
+                self?.showAlert(
+                    title: Strings.alertErrorTitleDownload,
+                    message: Strings.alertErrorMessageDownload)
             }
         }
         DispatchQueue.main.async() {

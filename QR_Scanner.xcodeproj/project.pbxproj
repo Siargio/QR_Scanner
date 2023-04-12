@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ECC5237229E6E22300BDEF00 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC5237129E6E22300BDEF00 /* NetworkService.swift */; };
 		ECC74A9929C1FCE400FA8A60 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC74A9829C1FCE400FA8A60 /* UIViewController+Ext.swift */; };
 		ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316729B6047100F98EDD /* AppDelegate.swift */; };
 		ECCD316C29B6047100F98EDD /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCD316B29B6047100F98EDD /* ScannerViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECC5237129E6E22300BDEF00 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		ECC74A9829C1FCE400FA8A60 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		ECCD316429B6047100F98EDD /* QR_Scanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QR_Scanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECCD316729B6047100F98EDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ECC5237029E6E1F700BDEF00 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				ECC5237129E6E22300BDEF00 /* NetworkService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		ECC74A9A29C1FD0300FA8A60 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,9 +82,10 @@
 		ECCD316629B6047100F98EDD /* QR_Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				ECC74A9A29C1FD0300FA8A60 /* Extension */,
 				ECCD317B29B6062E00F98EDD /* App */,
 				ECCD317E29B6068500F98EDD /* ModuleBuilder */,
+				ECC74A9A29C1FD0300FA8A60 /* Extension */,
+				ECC5237029E6E1F700BDEF00 /* NetworkService */,
 				ECCD317D29B6064B00F98EDD /* Sources */,
 				ECCD317C29B6063900F98EDD /* Resources */,
 				ECCD317529B6047200F98EDD /* Info.plist */,
@@ -209,6 +220,7 @@
 				ECD07DB129BCF839007E46FE /* WebPresenter.swift in Sources */,
 				ECD07DAF29BCF819007E46FE /* WebViewController.swift in Sources */,
 				ECC74A9929C1FCE400FA8A60 /* UIViewController+Ext.swift in Sources */,
+				ECC5237229E6E22300BDEF00 /* NetworkService.swift in Sources */,
 				ECD07DAC29BCEF36007E46FE /* ScannerPresenter.swift in Sources */,
 				ECD07DA829BCEB45007E46FE /* Router.swift in Sources */,
 				ECCD316829B6047100F98EDD /* AppDelegate.swift in Sources */,

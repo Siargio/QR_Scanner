@@ -37,21 +37,8 @@ final class WebViewPresenter: WebViewPresenterProtocol {
         webViewController?.showWebsite(URLRequest: urlRequest)
     }
 
-    func getDataFromUrl(url: String, completion: @escaping (Result<Data, Error>) -> ()) {
-        guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data else {
-                if let error {
-                    completion(.failure(error))
-                }
-                return
-            }
-            completion(.success(data))
-        }.resume()
-    }
-
     func share() {
-        getDataFromUrl(url: url) { [weak self] result in
+        NetworkService.shared.getDataFromUrl(url: url) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.webViewController?.shareInfo(data: data)
